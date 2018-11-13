@@ -236,7 +236,7 @@ public class Index1 extends javax.swing.JFrame {
         }
         Review change = new Review(keepID);
         change.setVisible(true);
-        IDrestaurant = 1;
+        IDrestaurant = keepID;
 
 
     }//GEN-LAST:event_Button2ActionPerformed
