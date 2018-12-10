@@ -20,6 +20,10 @@ import java.util.ArrayList;
  */
 public class RestaurantDao {
 
+    
+   
+    
+    
     public static boolean addPointAndCount(int IDrestaurant, int count, int point) throws SQLException {
         PreparedStatement pst;
         Connection connection;

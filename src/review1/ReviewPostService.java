@@ -44,8 +44,9 @@ public class ReviewPostService {
     }
 
     public static boolean sumPointAndCountToDB(int IDRestaurant, int count, int point) throws SQLException {
-
+       
         String keepIDrestaurant = "" + IDRestaurant;
+        RestaurantDao reviewPostDao = new RestaurantDao();
         int getcount = RestaurantDao.getCount(keepIDrestaurant);
         count = getcount + count;
         int getpoint = RestaurantDao.getPoint(keepIDrestaurant);
