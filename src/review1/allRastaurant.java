@@ -5,6 +5,7 @@
  */
 package review1;
 
+import java.awt.Dimension;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import net.proteanit.sql.DbUtils;
@@ -45,7 +47,6 @@ public class allRastaurant extends javax.swing.JFrame {
     public allRastaurant() {
 
         initComponents();
-        //getProvince();
 
         try {
 
@@ -55,50 +56,22 @@ public class allRastaurant extends javax.swing.JFrame {
             rs = stmt.executeQuery(countfromdatabase);
             showRestaurantTable.setModel(DbUtils.resultSetToTableModel(rs));
 
-            //
-            countfromdatabase = "Select PROVINCE_NAME From province";
-//
+            //get Province from database
+            countfromdatabase = "Select PROVINCE_ID,PROVINCE_NAME From province";
             rs = stmt.executeQuery(countfromdatabase);
             ArrayList<String> arr = new ArrayList();
             while (rs.next()) {
                 arr.add(rs.getString("PROVINCE_NAME"));
-                System.out.println(rs.getString("PROVINCE_NAME"));
             }
-            String [] arr2=new String[arr.size()];
+            String[] arr2 = new String[arr.size()];
             for (int i = 0; i < arr.size(); i++) {
-                arr2[i]=arr.get(i);
+                arr2[i] = arr.get(i);
             }
-           comboprovince.setModel(new DefaultComboBoxModel(arr2));
-           comboprovince.setAutoscrolls(true);
-//            for(int i=0;i<arr.size();i++){
-//                System.out.println("arr "+arr.get(i));
-//                comboprovince.addItem(arr.get(i));
-//            }
+            comboprovince.setModel(new DefaultComboBoxModel(arr2));
+          
+
         } catch (SQLException ex) {
             System.out.println(ex);
-        } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    /* ignored */
-                }
-            }
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                    /* ignored */
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    /* ignored */
-                }
-            }
-
         }
     }
 
@@ -115,10 +88,8 @@ public class allRastaurant extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        keyWord = new javax.swing.JTextField();
         search = new javax.swing.JButton();
         comboprovince = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -128,16 +99,11 @@ public class allRastaurant extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ImJung  Review");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jLabel1.setText("Keyword");
-
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel2.setText("จังหวัด");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         jLabel3.setText("jLabel1");
-
-        keyWord.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
 
         search.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         search.setText("ค้นหา");
@@ -147,9 +113,11 @@ public class allRastaurant extends javax.swing.JFrame {
             }
         });
 
-        comboprovince.setEditable(true);
         comboprovince.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        comboprovince.setMaximumRowCount(10);
+        comboprovince.setSelectedItem(comboprovince);
         comboprovince.setActionCommand("comboprovince");
+        comboprovince.setAutoscrolls(true);
         comboprovince.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboprovinceActionPerformed(evt);
@@ -185,41 +153,34 @@ public class allRastaurant extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(keyWord, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(comboprovince, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(54, 54, 54)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(comboprovince, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(344, 344, 344)
                         .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 805, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(keyWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(search)
-                    .addComponent(comboprovince))
-                .addGap(39, 39, 39)
+                    .addComponent(jLabel2)
+                    .addComponent(comboprovince, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(118, 118, 118)
-                        .addComponent(jLabel4)))
-                .addContainerGap(93, Short.MAX_VALUE))
+                        .addGap(157, 157, 157)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleParent(this);
@@ -228,41 +189,30 @@ public class allRastaurant extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void comboprovinceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboprovinceActionPerformed
-        // TODO add your handling code here:
-        //String nn = comboprovince.getSelectedItem().toString();
-        //System.out.println(nn);
 
-        initComponents();
-
-        //nn = null;
 
     }//GEN-LAST:event_comboprovinceActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
 
-        String nn = comboprovince.getSelectedItem().toString();
-        System.out.println(nn);
-
-        initComponents();
         try {
-            db db = new db();
-
-            PreparedStatement pst;
-            Connection connection;
             connection = DriverManager.getConnection(db.url, db.username, db.password);
             Statement stmt = connection.createStatement();
-
-            String countfromdatabase = "Select NameRestaurant,rating,Province, "
-                    + "linkImage"
-                    + "From Restaurant";
-            ResultSet rs = stmt.executeQuery(countfromdatabase);
+            
+            Object province = comboprovince.getSelectedItem();
+         
+            System.out.println(comboprovince.getSelectedItem());
+         
+            String countfromdatabase = "Select NameRestaurant,rating,Province,linkImage From Restaurant where Province='" + province+"'";
+            rs = stmt.executeQuery(countfromdatabase);
             showRestaurantTable.setModel(DbUtils.resultSetToTableModel(rs));
+     
 
         } catch (SQLException ex) {
-
+            System.out.println(ex);
         }
 
-        nn = null;
+
     }//GEN-LAST:event_searchActionPerformed
 
     private void showRestaurantTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showRestaurantTableMouseClicked
@@ -285,12 +235,10 @@ public class allRastaurant extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboprovince;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField keyWord;
     private javax.swing.JButton search;
     private javax.swing.JTable showRestaurantTable;
     // End of variables declaration//GEN-END:variables
