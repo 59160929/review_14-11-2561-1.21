@@ -26,7 +26,7 @@ public class allRastaurant extends javax.swing.JFrame {
     Connection connection = null;
     db db = new db();
     ResultSet rs = null;
-    ArrayList<Obj_Restaurant> or = new ArrayList<>();
+    ArrayList<Restaurant> or = new ArrayList<>();
 
     allRestaurantService aRS = new allRestaurantService();
 
@@ -41,8 +41,7 @@ public class allRastaurant extends javax.swing.JFrame {
 
         initComponents();
         DefaultTableModel model = (DefaultTableModel) showRestaurantTable.getModel();
-        ArrayList<Obj_Restaurant> getRestaurant = new ArrayList<Obj_Restaurant>();
-
+        ArrayList<Restaurant> getRestaurant = new ArrayList<Restaurant>();
         getRestaurant = aRS.getData();
 
         String rw[] = new String[3];
@@ -53,7 +52,9 @@ public class allRastaurant extends javax.swing.JFrame {
             rw[2] = getRestaurant.get(i).getProvince();
 
             model.addRow(rw);
+
         }
+
     }
 
     public static void showRestaurant() {
@@ -96,7 +97,7 @@ public class allRastaurant extends javax.swing.JFrame {
 
         comboprovince.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         comboprovince.setMaximumRowCount(10);
-        comboprovince.setSelectedItem(comboprovince);
+        comboprovince.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--กรุณาเลือกจังหวัด--", "กรุงเทพมหานคร", "สมุทรปราการ", "นนทบุรี", "ปทุมธานี", "พระนครศรีอยุธยา", "อ่างทอง", "ลพบุรี", "สิงห์บุรี", "ชัยนาท", "สระบุรี", "ชลบุรี", "ระยอง", "จันทบุรี", "ตราด", "ฉะเชิงเทรา", "ปราจีนบุรี", "นครนายก", "สระแก้ว", "นครราชสีมา", "บุรีรัมย์", "สุรินทร์", "ศรีสะเกษ", "อุบลราชธานี", "ยโสธร", "ชัยภูมิ", "อำนาจเจริญ", "หนองบัวลำภู", "ขอนแก่น", "อุดรธานี", "เลย", "หนองคาย", "มหาสารคาม", "ร้อยเอ็ด", "กาฬสินธุ์", "สกลนคร", "นครพนม", "มุกดาหาร", "เชียงใหม่", "ลำพูน", "ลำปาง", "อุตรดิตถ์", "แพร่", "น่าน", "พะเยา", "เชียงราย", "แม่ฮ่องสอน", "นครสวรรค์", "อุทัยธานี", "กำแพงเพชร", "ตาก", "สุโขทัย", "พิษณุโลก", "พิจิตร", "เพชรบูรณ์", "ราชบุรี", "กาญจนบุรี", "สุพรรณบุรี", "นครปฐม", "สมุทรสาคร", "สมุทรสงคราม", "เพชรบุรี", "ประจวบคีรีขันธ์", "นครศรีธรรมราช", "กระบี่", "พังงา", "ภูเก็ต", "สุราษฎร์ธานี", "ระนอง", "ชุมพร", "สงขลา", "สตูล", "ตรัง", "พัทลุง", "ปัตตานี", "ยะลา", "นราธิวาส", "บึงกาฬ" }));
         comboprovince.setActionCommand("comboprovince");
         comboprovince.setAutoscrolls(true);
         comboprovince.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +112,7 @@ public class allRastaurant extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Image", "Name", "Rating"
+                "Name", "Rating", "Province"
             }
         ));
         showRestaurantTable.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -141,12 +142,12 @@ public class allRastaurant extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addComponent(jLabel4)
                 .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(comboprovince, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(344, 344, 344)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 805, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(61, Short.MAX_VALUE))
@@ -177,6 +178,7 @@ public class allRastaurant extends javax.swing.JFrame {
 
     private void comboprovinceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboprovinceActionPerformed
 
+
     }//GEN-LAST:event_comboprovinceActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
@@ -189,13 +191,14 @@ public class allRastaurant extends javax.swing.JFrame {
 
             System.out.println(comboprovince.getSelectedItem());
 
-            String countfromdatabase = "Select NameRestaurant,rating,Province,linkImage From Restaurant where Province='" + province + "'";
+            String countfromdatabase = "Select NameRestaurant,rating,Province From Restaurant where Province='" + province + "'";
             rs = stmt.executeQuery(countfromdatabase);
             showRestaurantTable.setModel(DbUtils.resultSetToTableModel(rs));
 
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+
 
     }//GEN-LAST:event_searchActionPerformed
 

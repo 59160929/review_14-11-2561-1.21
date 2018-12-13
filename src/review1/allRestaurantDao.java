@@ -19,29 +19,10 @@ import net.proteanit.sql.DbUtils;
  * @author KirkThunder
  */
 public class allRestaurantDao {
-    
+
     //selectnam
-    public static void getname(){
-        String name01 = "";
-        try {
-            db db = new db();
-
-            PreparedStatement pst;
-            Connection connection;
-            connection = DriverManager.getConnection(db.url, db.username, db.password);
-            Statement stmt = connection.createStatement();
-            String countfromdatabase = "Select NameRestaurant From Restaurant ";
-            ResultSet rs = stmt.executeQuery(countfromdatabase);
-            
-            
-        } catch (SQLException ex) {
-
-        }
-
-        
-    }
-    public ArrayList<Obj_Restaurant> getAll() {
-        ArrayList<Obj_Restaurant> list = new ArrayList<>();
+    public ArrayList<Restaurant> getAllRestarant() {
+        ArrayList<Restaurant> list = new ArrayList<>();
         try {
             PreparedStatement pst;
             Connection connection;
@@ -51,18 +32,15 @@ public class allRestaurantDao {
             ResultSet rs = st.executeQuery(countfromdatabase);
 
             while (rs.next()) {
-                   list.add(new Obj_Restaurant(rs.getString("NameRestaurant"), rs.getDouble("Rating"), rs.getString("Province")));
+                list.add(new Restaurant(rs.getString("NameRestaurant"), rs.getDouble("Rating"), rs.getString("Province")));
             }
 
         } catch (SQLException ex) {
-           
+
         }
         return list;
     }
 
-    String PROVINCE(String sql) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-}
+   
 
+}

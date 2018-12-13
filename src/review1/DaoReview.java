@@ -5,20 +5,14 @@
  */
 package review1;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
  *
- * @author KirkThunder
+ * @author 59160929
  */
-public class allRestaurantService {
-
-    public static ArrayList<Restaurant> getData() {
-        allRestaurantDao data = new allRestaurantDao();
-        return data.getAllRestarant();
-    }
+public interface DaoReview<T> {
+      
+    ArrayList<T> getRestaurant();
     
-
-
 }
