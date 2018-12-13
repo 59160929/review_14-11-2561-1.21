@@ -5,12 +5,6 @@
  */
 package review1;
 
-import java.awt.Dimension;
-import java.awt.Image;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,12 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -36,6 +26,9 @@ public class allRastaurant extends javax.swing.JFrame {
     Connection connection = null;
     db db = new db();
     ResultSet rs = null;
+    ArrayList<Obj_Restaurant> or = new ArrayList<>();
+
+    allRestaurantService aRS = new allRestaurantService();
 
     private void showDataCombo(PreparedStatement psl) {
 
@@ -47,31 +40,19 @@ public class allRastaurant extends javax.swing.JFrame {
     public allRastaurant() {
 
         initComponents();
+        DefaultTableModel model = (DefaultTableModel) showRestaurantTable.getModel();
+        ArrayList<Obj_Restaurant> getRestaurant = new ArrayList<Obj_Restaurant>();
 
-        try {
+        getRestaurant = aRS.getData();
 
-            connection = DriverManager.getConnection(db.url, db.username, db.password);
-            Statement stmt = connection.createStatement();
-            String countfromdatabase = "Select NameRestaurant,rating,Province,linkImage From Restaurant ";
-            rs = stmt.executeQuery(countfromdatabase);
-            showRestaurantTable.setModel(DbUtils.resultSetToTableModel(rs));
+        String rw[] = new String[3];
 
-            //get Province from database
-            countfromdatabase = "Select PROVINCE_ID,PROVINCE_NAME From province";
-            rs = stmt.executeQuery(countfromdatabase);
-            ArrayList<String> arr = new ArrayList();
-            while (rs.next()) {
-                arr.add(rs.getString("PROVINCE_NAME"));
-            }
-            String[] arr2 = new String[arr.size()];
-            for (int i = 0; i < arr.size(); i++) {
-                arr2[i] = arr.get(i);
-            }
-            comboprovince.setModel(new DefaultComboBoxModel(arr2));
-          
+        for (int i = 0; i < getRestaurant.size(); i++) {
+            rw[0] = getRestaurant.get(i).getNameRestaurant();
+            rw[1] = "" + getRestaurant.get(i).getRating();
+            rw[2] = getRestaurant.get(i).getProvince();
 
-        } catch (SQLException ex) {
-            System.out.println(ex);
+            model.addRow(rw);
         }
     }
 
@@ -127,15 +108,21 @@ public class allRastaurant extends javax.swing.JFrame {
         showRestaurantTable.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         showRestaurantTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Image", "Name", "Rating"
             }
         ));
+        showRestaurantTable.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                showRestaurantTableAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         showRestaurantTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 showRestaurantTableMouseClicked(evt);
@@ -190,7 +177,6 @@ public class allRastaurant extends javax.swing.JFrame {
 
     private void comboprovinceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboprovinceActionPerformed
 
-
     }//GEN-LAST:event_comboprovinceActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
@@ -198,20 +184,18 @@ public class allRastaurant extends javax.swing.JFrame {
         try {
             connection = DriverManager.getConnection(db.url, db.username, db.password);
             Statement stmt = connection.createStatement();
-            
+
             Object province = comboprovince.getSelectedItem();
-         
+
             System.out.println(comboprovince.getSelectedItem());
-         
-            String countfromdatabase = "Select NameRestaurant,rating,Province,linkImage From Restaurant where Province='" + province+"'";
+
+            String countfromdatabase = "Select NameRestaurant,rating,Province,linkImage From Restaurant where Province='" + province + "'";
             rs = stmt.executeQuery(countfromdatabase);
             showRestaurantTable.setModel(DbUtils.resultSetToTableModel(rs));
-     
 
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-
 
     }//GEN-LAST:event_searchActionPerformed
 
@@ -219,6 +203,10 @@ public class allRastaurant extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_showRestaurantTableMouseClicked
+
+    private void showRestaurantTableAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_showRestaurantTableAncestorAdded
+
+    }//GEN-LAST:event_showRestaurantTableAncestorAdded
 
     /**
      * @param args the command line arguments

@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -38,6 +39,25 @@ public class allRestaurantDao {
         }
 
         
+    }
+    public ArrayList<Obj_Restaurant> getAll() {
+        ArrayList<Obj_Restaurant> list = new ArrayList<>();
+        try {
+            PreparedStatement pst;
+            Connection connection;
+            connection = DriverManager.getConnection(db.url, db.username, db.password);
+            Statement st = connection.createStatement();
+            String countfromdatabase = "Select NameRestaurant,Rating,Province From Restaurant";
+            ResultSet rs = st.executeQuery(countfromdatabase);
+
+            while (rs.next()) {
+                   list.add(new Obj_Restaurant(rs.getString("NameRestaurant"), rs.getDouble("Rating"), rs.getString("Province")));
+            }
+
+        } catch (SQLException ex) {
+           
+        }
+        return list;
     }
 
     String PROVINCE(String sql) {
