@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
@@ -24,15 +25,9 @@ public class allRastaurant extends javax.swing.JFrame {
 
     PreparedStatement ps = null;
     Connection connection = null;
-    db db = new db();
     ResultSet rs = null;
     ArrayList<Restaurant> or = new ArrayList<>();
-
     allRestaurantService aRS = new allRestaurantService();
-
-    private void showDataCombo(PreparedStatement psl) {
-
-    }
 
     /**
      * Creates new form IndexList
@@ -54,10 +49,6 @@ public class allRastaurant extends javax.swing.JFrame {
             model.addRow(rw);
 
         }
-
-    }
-
-    public static void showRestaurant() {
 
     }
 
@@ -97,7 +88,7 @@ public class allRastaurant extends javax.swing.JFrame {
 
         comboprovince.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         comboprovince.setMaximumRowCount(10);
-        comboprovince.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--กรุณาเลือกจังหวัด--", "กรุงเทพมหานคร", "สมุทรปราการ", "นนทบุรี", "ปทุมธานี", "พระนครศรีอยุธยา", "อ่างทอง", "ลพบุรี", "สิงห์บุรี", "ชัยนาท", "สระบุรี", "ชลบุรี", "ระยอง", "จันทบุรี", "ตราด", "ฉะเชิงเทรา", "ปราจีนบุรี", "นครนายก", "สระแก้ว", "นครราชสีมา", "บุรีรัมย์", "สุรินทร์", "ศรีสะเกษ", "อุบลราชธานี", "ยโสธร", "ชัยภูมิ", "อำนาจเจริญ", "หนองบัวลำภู", "ขอนแก่น", "อุดรธานี", "เลย", "หนองคาย", "มหาสารคาม", "ร้อยเอ็ด", "กาฬสินธุ์", "สกลนคร", "นครพนม", "มุกดาหาร", "เชียงใหม่", "ลำพูน", "ลำปาง", "อุตรดิตถ์", "แพร่", "น่าน", "พะเยา", "เชียงราย", "แม่ฮ่องสอน", "นครสวรรค์", "อุทัยธานี", "กำแพงเพชร", "ตาก", "สุโขทัย", "พิษณุโลก", "พิจิตร", "เพชรบูรณ์", "ราชบุรี", "กาญจนบุรี", "สุพรรณบุรี", "นครปฐม", "สมุทรสาคร", "สมุทรสงคราม", "เพชรบุรี", "ประจวบคีรีขันธ์", "นครศรีธรรมราช", "กระบี่", "พังงา", "ภูเก็ต", "สุราษฎร์ธานี", "ระนอง", "ชุมพร", "สงขลา", "สตูล", "ตรัง", "พัทลุง", "ปัตตานี", "ยะลา", "นราธิวาส", "บึงกาฬ" }));
+        comboprovince.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ร้านทั้งหมด", "กรุงเทพมหานคร", "สมุทรปราการ", "นนทบุรี", "ปทุมธานี", "พระนครศรีอยุธยา", "อ่างทอง", "ลพบุรี", "สิงห์บุรี", "ชัยนาท", "สระบุรี", "ชลบุรี", "ระยอง", "จันทบุรี", "ตราด", "ฉะเชิงเทรา", "ปราจีนบุรี", "นครนายก", "สระแก้ว", "นครราชสีมา", "บุรีรัมย์", "สุรินทร์", "ศรีสะเกษ", "อุบลราชธานี", "ยโสธร", "ชัยภูมิ", "อำนาจเจริญ", "หนองบัวลำภู", "ขอนแก่น", "อุดรธานี", "เลย", "หนองคาย", "มหาสารคาม", "ร้อยเอ็ด", "กาฬสินธุ์", "สกลนคร", "นครพนม", "มุกดาหาร", "เชียงใหม่", "ลำพูน", "ลำปาง", "อุตรดิตถ์", "แพร่", "น่าน", "พะเยา", "เชียงราย", "แม่ฮ่องสอน", "นครสวรรค์", "อุทัยธานี", "กำแพงเพชร", "ตาก", "สุโขทัย", "พิษณุโลก", "พิจิตร", "เพชรบูรณ์", "ราชบุรี", "กาญจนบุรี", "สุพรรณบุรี", "นครปฐม", "สมุทรสาคร", "สมุทรสงคราม", "เพชรบุรี", "ประจวบคีรีขันธ์", "นครศรีธรรมราช", "กระบี่", "พังงา", "ภูเก็ต", "สุราษฎร์ธานี", "ระนอง", "ชุมพร", "สงขลา", "สตูล", "ตรัง", "พัทลุง", "ปัตตานี", "ยะลา", "นราธิวาส", "บึงกาฬ" }));
         comboprovince.setActionCommand("comboprovince");
         comboprovince.setAutoscrolls(true);
         comboprovince.addActionListener(new java.awt.event.ActionListener() {
@@ -182,7 +173,7 @@ public class allRastaurant extends javax.swing.JFrame {
     }//GEN-LAST:event_comboprovinceActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-
+        /*
         try {
             connection = DriverManager.getConnection(db.url, db.username, db.password);
             Statement stmt = connection.createStatement();
@@ -197,6 +188,46 @@ public class allRastaurant extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             System.out.println(ex);
+        }*/
+
+        //----------------------
+        DefaultTableModel model = (DefaultTableModel) showRestaurantTable.getModel();
+        ArrayList<Restaurant> getRestaurant = new ArrayList<Restaurant>();
+        getRestaurant = aRS.getData();
+
+        String getByProvince[] = new String[3];
+        String rw[] = new String[3];
+        boolean t = true;
+        for (int i = 0; i < getRestaurant.size(); i++) {
+            if (comboprovince.getSelectedItem().equals("ร้านทั้งหมด")) {
+                
+                rw[0] = getRestaurant.get(i).getNameRestaurant();
+                rw[1] = "" + getRestaurant.get(i).getRating();
+                rw[2] = getRestaurant.get(i).getProvince();
+
+                model.addRow(rw);
+
+            } else if (comboprovince.getSelectedItem().equals(getRestaurant.get(i).getProvince())) {
+
+                if (t == true) {
+                    DefaultTableModel dm = (DefaultTableModel) showRestaurantTable.getModel();
+                    while (dm.getRowCount() > 0) {
+                        dm.removeRow(0);
+                    }
+                    t = false;
+                    i=0;
+                } else {
+                    
+                    getByProvince[0] = getRestaurant.get(i).getNameRestaurant();
+                    getByProvince[1] = "" + getRestaurant.get(i).getRating();
+                    getByProvince[2] = getRestaurant.get(i).getProvince();
+                    model.addRow(getByProvince);
+
+                }
+            } else {
+                continue;
+            }
+
         }
 
 
