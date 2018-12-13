@@ -11,15 +11,127 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 /**
  *
  * @author 59160929
  */
+
 public class ReviewPostService {
 
-    RestaurantDao reviewPostDao = new RestaurantDao();
+        private static DaoReview restaurantDao;
+        private static DaoReview restaurant;
 
+         
+        public static ArrayList<Restaurant> getLinkImage(){
+            
+            restaurantDao = new  RestaurantDao();
+            
+            
+            
+            return restaurantDao.getRestaurant();
+        }
+        
+        public static String getLink(int IDRestaurant){
+           ArrayList<Restaurant> restaurant = getLinkImage();
+           
+           for(int i=0 ;i<restaurant.size();i++){
+               return restaurant.get(IDRestaurant).getlinkImage();
+           }
+           return "";
+        }
+        public static double avgPoint(int IDRestaurant){
+           ArrayList<Restaurant> restaurant = getLinkImage();
+           
+           for(int i=0 ;i<restaurant.size();i++){
+               
+               double count = restaurant.get(IDRestaurant).getCount();
+                double point = restaurant.get(IDRestaurant).getPoint();
+                double average = point/count;
+               return average;
+               
+           }
+           return 0.00 ;
+           
+        }
+        public static String getNameRestaurant(int IDRestaurant){
+           ArrayList<Restaurant> restaurant = getLinkImage();
+           
+           for(int i=0 ;i<restaurant.size();i++){
+               
+               String name = restaurant.get(IDRestaurant).getNameRestaurant();
+               
+               return name;
+               
+           }
+           return "";
+
+            }
+        public static String getDescribtionRestaurant(int IDRestaurant){
+           ArrayList<Restaurant> restaurant = getLinkImage();
+           
+           for(int i=0 ;i<restaurant.size();i++){
+               
+               String describtion = restaurant.get(IDRestaurant).getDescribtionRestaurant();
+               
+               return describtion;
+               
+           }
+           return "";
+
+            }
+            
+         public static String getAddressRestaurant(int IDRestaurant){
+           ArrayList<Restaurant> restaurant = getLinkImage();
+           
+           for(int i=0 ;i<restaurant.size();i++){
+               
+               String addressRestaurant = restaurant.get(IDRestaurant).getAddressRestaurant();
+               
+               return addressRestaurant;
+               
+           }
+           return "";
+
+            }
+       public static boolean sumPointAndCountToDB(int IDRestaurant, int count, int point) throws SQLException{
+         
+       ArrayList<Restaurant> restaurant = getLinkImage();
+           
+           for(int i=0 ;i<restaurant.size();i++){
+               
+               int getcount = restaurant.get(IDRestaurant).getCount();
+               count = count+getcount;
+                int getpoint = restaurant.get(IDRestaurant).getPoint();
+                point = point+getpoint;
+                double average = point/count;
+                String ID = IDRestaurant+"";
+                    RestaurantDao.updatePointAndCount(ID, count, point);
+               return true;
+               
+           }
+            return false;
+
+            }      
+            
+            
+    
+   
+                    
+        
+        public static void main(String [] args){
+            ArrayList<Restaurant> restaurant = getLinkImage();
+            
+            
+            for(int i=0;i<restaurant.size();i++){
+                System.out.println( getLink(2));
+            }
+            
+        }
+        
+         
+         /**
     public static String avgPoint(int IDRestaurant) throws SQLException {
         float count = 0;
         float point = 0;
@@ -40,6 +152,18 @@ public class ReviewPostService {
         }
 
         return totalavarage;
+
+    }
+    
+        public static String getLinkRestaurant(int IDRestaurant) throws SQLException {
+
+        String keepIDRestaurant = "" + IDRestaurant;
+        Restaurant restaurant = new Restaurant();
+        String link=null;
+        
+        restaurant = reviewPostDao.getRestaurant(keepIDRestaurant);
+        
+        return link;
 
     }
 
@@ -88,7 +212,19 @@ public class ReviewPostService {
         return AddressRestaurant;
 
     }
-    
+      public static String getLinkRestaurant(int IDRestaurant) throws SQLException {
+        
+
+        String keepIDrestaurant = "" + IDRestaurant;
+        String linkImage;
+        RestaurantDao reviewPostDao = new RestaurantDao();
+
+        linkImage = reviewPostDao.getLinkRestaurant(keepIDrestaurant);
+        
+       
+        return linkImage;
+
+    }
     
       public static String getNameRestaurant(int IDRestaurant) throws SQLException {
         String info;
@@ -105,5 +241,5 @@ public class ReviewPostService {
 
     }
     
-    
+    */
 }

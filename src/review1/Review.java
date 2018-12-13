@@ -5,9 +5,17 @@
  */
 package review1;
 
+import java.awt.Image;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -22,11 +30,11 @@ public class Review extends javax.swing.JFrame {
     /**
      * Creates new form Review
      */
-    private int idRestaurant;
+    private int IDRestaurant;
 
     public Review(int x) {
 
-        idRestaurant = x;
+        IDRestaurant = x;
 
         initComponents();
     }
@@ -57,7 +65,6 @@ public class Review extends javax.swing.JFrame {
         jProgressBar1 = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        NameRestaurant = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -65,9 +72,7 @@ public class Review extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        LabelReview = new javax.swing.JLabel();
-        LabelAddress = new javax.swing.JLabel();
-        imageBtn = new javax.swing.JButton();
+        Namelbl = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -80,6 +85,10 @@ public class Review extends javax.swing.JFrame {
         btnNearby1 = new javax.swing.JButton();
         btnNearby2 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
+        NameRestaurant = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        Addresslbl1 = new javax.swing.JLabel();
+        Reviewlbl1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1070, 690));
@@ -213,24 +222,22 @@ public class Review extends javax.swing.JFrame {
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(703, 0, 370, 200));
 
         jPanel1.setBackground(new java.awt.Color(247, 251, 247));
+        jPanel1.setName(""); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        NameRestaurant.setFont(new java.awt.Font("Angsana New", 1, 48)); // NOI18N
-        NameRestaurant.setForeground(new java.awt.Color(255, 0, 153));
-        NameRestaurant.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                NameRestaurantAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        jPanel1.add(NameRestaurant, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 620, 70));
 
         jLabel16.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 36)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel16.setText("Review");
+        jLabel16.setIcon(new javax.swing.JLabel() {
+            public javax.swing.Icon getIcon() {
+                try {
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("http://do9.xyz/upload/images/2018/12/10/review2.png")
+                    );
+                } catch (java.net.MalformedURLException e) {
+                }
+                return null;
+            }
+        }.getIcon());
         jLabel16.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -240,7 +247,7 @@ public class Review extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 88, 173, 40));
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 290, 50));
 
         jPanel3.setBackground(new java.awt.Color(247, 251, 247));
         jPanel3.setLayout(null);
@@ -285,45 +292,30 @@ public class Review extends javax.swing.JFrame {
 
         jLabel19.setFont(new java.awt.Font("Yu Gothic UI Light", 1, 36)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel19.setText("Address");
-        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 188, -1, 40));
+        jLabel19.setIcon(new javax.swing.JLabel() {
+            public javax.swing.Icon getIcon() {
+                try {
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("http://do9.xyz/upload/images/2018/12/10/address.png")
+                    );
+                } catch (java.net.MalformedURLException e) {
+                }
+                return null;
+            }
+        }.getIcon());
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 300, 40));
 
-        LabelReview.setFont(new java.awt.Font("Angsana New", 0, 20)); // NOI18N
-        LabelReview.addAncestorListener(new javax.swing.event.AncestorListener() {
+        Namelbl.setFont(new java.awt.Font("Angsana New", 0, 28)); // NOI18N
+        Namelbl.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                LabelReviewAncestorAdded(evt);
+                NamelblAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        LabelReview.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentHidden(java.awt.event.ComponentEvent evt) {
-                LabelReviewComponentHidden(evt);
-            }
-        });
-        jPanel1.add(LabelReview, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 680, 50));
-
-        LabelAddress.setFont(new java.awt.Font("Angsana New", 0, 20)); // NOI18N
-        LabelAddress.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                LabelAddressAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        jPanel1.add(LabelAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 680, 50));
-
-        imageBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/ก๋วยเตี๋ยวต้มยำไช่สะดุ้ง.jpg"))); // NOI18N
-        imageBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                imageBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(imageBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 200, 370, 240));
+        jPanel1.add(Namelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 680, 50));
 
         jPanel4.setBackground(new java.awt.Color(251, 229, 229));
 
@@ -409,6 +401,18 @@ public class Review extends javax.swing.JFrame {
 
         jButton13.setText("B");
 
+        NameRestaurant.setFont(new java.awt.Font("Angsana New", 1, 48)); // NOI18N
+        NameRestaurant.setForeground(new java.awt.Color(255, 0, 153));
+        NameRestaurant.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                NameRestaurantAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -441,85 +445,83 @@ public class Review extends javax.swing.JFrame {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 420, 370, 220));
 
+        jLabel2.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jLabel2AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 200, 370, 220));
+
+        Addresslbl1.setFont(new java.awt.Font("Angsana New", 0, 20)); // NOI18N
+        Addresslbl1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                Addresslbl1AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jPanel1.add(Addresslbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 680, 50));
+
+        Reviewlbl1.setFont(new java.awt.Font("Angsana New", 0, 20)); // NOI18N
+        Reviewlbl1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                Reviewlbl1AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jPanel1.add(Reviewlbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 680, 50));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 690));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
    ReviewPostService reviewPostService = new ReviewPostService();
-    
 
     //private int idRestaurant = Index.x ;
     private int count = 1;
     private int point = 0;
 
     public void showAvarage() {
-        try {
-
-            jLabel12.setText("" + reviewPostService.avgPoint(idRestaurant));;
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Review.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        jLabel12.setText("" + reviewPostService.avgPoint(IDRestaurant));
         
+
     }
-    
-    
+
     public void showNameRestaurant() {
-        try {
-
-            NameRestaurant.setText("" + reviewPostService.getNameRestaurant(idRestaurant));;
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Review.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Namelbl.setText("" + reviewPostService.getNameRestaurant(IDRestaurant));
 
     }
-    
-    
+
     public void showDescribtion() {
-        try {
-
-            LabelReview.setText("" + reviewPostService.getDescribtion(idRestaurant));;
-            
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Review.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Reviewlbl1.setText("" + reviewPostService.getDescribtionRestaurant(IDRestaurant));
 
     }
-    
-    
+
     public void showAddressRestaurant() {
-        try {
-
-            LabelAddress.setText("" + reviewPostService.getAddressRestaurant(idRestaurant));;
-            
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Review.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Addresslbl1.setText("" + reviewPostService.getAddressRestaurant(IDRestaurant));
 
     }
-        
-        
-    
-    public void point(int x) {
-        point = x ;
-     try {
-            if (reviewPostService.sumPointAndCountToDB(idRestaurant, 1, point) == true) {
 
-                JOptionPane.showMessageDialog(this, "ให้คะเเนนเรียบร้อยเเล้ว");
+    public void point(int x) throws SQLException {
+        point = x;
+        if (reviewPostService.sumPointAndCountToDB(IDRestaurant, 1, point) == true) {
 
-            }
-        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "ให้คะเเนนเรียบร้อยเเล้ว");
 
         }
-       }  
-        
-        
-        
+    }
+
+
     private void jLabel17AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel17AncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel17AncestorAdded
@@ -527,21 +529,18 @@ public class Review extends javax.swing.JFrame {
     private void jLabel17ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jLabel17ComponentAdded
 
         //เเสดง
-        
+
     }//GEN-LAST:event_jLabel17ComponentAdded
 
     private void NameRestaurantAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_NameRestaurantAncestorAdded
-showNameRestaurant();
+        showNameRestaurant();
     }//GEN-LAST:event_NameRestaurantAncestorAdded
 
     private void jLabel12AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel12AncestorAdded
 
         float a = 0;
-        try {
-            jLabel12.setText("" + reviewPostService.avgPoint(idRestaurant));;
-        } catch (SQLException ex) {
-            Logger.getLogger(Review.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        jLabel12.setText("" + reviewPostService.avgPoint(IDRestaurant));
+        ;
         showAvarage();
 
 
@@ -549,8 +548,12 @@ showNameRestaurant();
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-// 1 point
-        point(1);
+        try {
+            // 1 point
+            point(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(Review.class.getName()).log(Level.SEVERE, null, ex);
+        }
         showAvarage();
 
 
@@ -558,8 +561,12 @@ showNameRestaurant();
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
 
-        // 2 point
-        point(2);
+        try {
+            // 2 point
+            point(2);
+        } catch (SQLException ex) {
+            Logger.getLogger(Review.class.getName()).log(Level.SEVERE, null, ex);
+        }
         showAvarage();
 
 
@@ -567,8 +574,12 @@ showNameRestaurant();
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
 
-        // 3 point
-        point(3);
+        try {
+            // 3 point
+            point(3);
+        } catch (SQLException ex) {
+            Logger.getLogger(Review.class.getName()).log(Level.SEVERE, null, ex);
+        }
         showAvarage();
 
 
@@ -576,8 +587,12 @@ showNameRestaurant();
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
 
-        // 4 point
-        point(4);
+        try {
+            // 4 point
+            point(4);
+        } catch (SQLException ex) {
+            Logger.getLogger(Review.class.getName()).log(Level.SEVERE, null, ex);
+        }
         showAvarage();
 
 
@@ -585,36 +600,56 @@ showNameRestaurant();
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
 
-        // 5 point
-        point(5);
+        try {
+            // 5 point
+            point(5);
+        } catch (SQLException ex) {
+            Logger.getLogger(Review.class.getName()).log(Level.SEVERE, null, ex);
+        }
         showAvarage();
 
 
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void LabelReviewAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_LabelReviewAncestorAdded
-         showAddressRestaurant();
-    }//GEN-LAST:event_LabelReviewAncestorAdded
-
-    private void LabelAddressAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_LabelAddressAncestorAdded
-       showDescribtion();        // TODO add your handling code here:
-    }//GEN-LAST:event_LabelAddressAncestorAdded
+    private void NamelblAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_NamelblAncestorAdded
+        showNameRestaurant();
+    }//GEN-LAST:event_NamelblAncestorAdded
 
     private void jLabel16AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel16AncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel16AncestorAdded
 
-    private void LabelReviewComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_LabelReviewComponentHidden
-        // TODO add your handling code here:
-    }//GEN-LAST:event_LabelReviewComponentHidden
-
-    private void imageBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imageBtnActionPerformed
-// code get image form website
-    }//GEN-LAST:event_imageBtnActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jLabel2AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel2AncestorAdded
+
+        Image image = null;
+        try {
+            String link;
+            link = ReviewPostService.getLink(IDRestaurant);
+            URL url = new URL(link);
+            image = ImageIO.read(url);
+            ImageIcon image3 = new ImageIcon(image);
+            jLabel2.setIcon(image3);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }//GEN-LAST:event_jLabel2AncestorAdded
+
+    private void Addresslbl1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_Addresslbl1AncestorAdded
+        showAddressRestaurant();
+    }//GEN-LAST:event_Addresslbl1AncestorAdded
+
+    private void Reviewlbl1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_Reviewlbl1AncestorAdded
+        showDescribtion();
+
+
+    }//GEN-LAST:event_Reviewlbl1AncestorAdded
 
     /**
      * @param args the command line arguments
@@ -652,12 +687,12 @@ showNameRestaurant();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LabelAddress;
-    private javax.swing.JLabel LabelReview;
+    private javax.swing.JLabel Addresslbl1;
     private javax.swing.JLabel NameRestaurant;
+    private javax.swing.JLabel Namelbl;
+    private javax.swing.JLabel Reviewlbl1;
     private javax.swing.JButton btnNearby1;
     private javax.swing.JButton btnNearby2;
-    private javax.swing.JButton imageBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton13;
@@ -674,6 +709,7 @@ showNameRestaurant();
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
