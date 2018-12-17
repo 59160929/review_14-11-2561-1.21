@@ -215,35 +215,55 @@ public class allRastaurant extends javax.swing.JFrame {
         String getByProvince[] = new String[4];
         String rw[] = new String[4];
         boolean t = true;
+        boolean checkall = true;
         for (int i = 0; i < getRestaurant.size(); i++) {
             if (comboprovince.getSelectedItem().equals("ร้านทั้งหมด")) {
 
-                rw[0] = "" + getRestaurant.get(i).getIDRestaurant();
-                rw[1] = getRestaurant.get(i).getNameRestaurant();
-                rw[2] = "" + getRestaurant.get(i).getRating();
-                rw[3] = getRestaurant.get(i).getProvince();
+                if (checkall == true) {
 
-                model.addRow(rw);
-
-            } else if (comboprovince.getSelectedItem().equals(getRestaurant.get(i).getProvince())) {
-
-                if (t == true) {
                     DefaultTableModel dm = (DefaultTableModel) showRestaurantTable.getModel();
+                    /*
                     while (dm.getRowCount() > 0) {
+                       
+                    }
+                     */
+                    
+                    for (int j = dm.getRowCount(); j > 0; j--) {
                         dm.removeRow(0);
                     }
-                    t = false;
+
+                    checkall = false;
                     i = 0;
-                } else {
+                }
 
                     rw[0] = "" + getRestaurant.get(i).getIDRestaurant();
                     rw[1] = getRestaurant.get(i).getNameRestaurant();
                     rw[2] = "" + getRestaurant.get(i).getRating();
                     rw[3] = getRestaurant.get(i).getProvince();
-                    
+
                     model.addRow(rw);
 
-                }
+                
+
+            } else if (comboprovince.getSelectedItem().equals(getRestaurant.get(i).getProvince())) {
+
+                if (t == true) {
+                    DefaultTableModel dm = (DefaultTableModel) showRestaurantTable.getModel();
+                    for (int j = dm.getRowCount(); j > 0; j--) {
+                        dm.removeRow(0);
+                    }
+                    t = false;
+                    
+                } 
+
+                    rw[0] = "" + getRestaurant.get(i).getIDRestaurant();
+                    rw[1] = getRestaurant.get(i).getNameRestaurant();
+                    rw[2] = "" + getRestaurant.get(i).getRating();
+                    rw[3] = getRestaurant.get(i).getProvince();
+
+                    model.addRow(rw);
+
+                
             } else {
                 continue;
             }
