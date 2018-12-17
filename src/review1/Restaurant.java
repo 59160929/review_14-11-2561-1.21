@@ -44,7 +44,8 @@ public final class Restaurant {
         
     }
 
-     public Restaurant( String NameRestaurant,double Rating,String Province) {
+     public Restaurant( int idRestaurant,String NameRestaurant,double Rating,String Province) {
+         this.idRestaurant=idRestaurant;
         this.NameRestaurant = NameRestaurant;
         this.Province = Province;
         this.Rating = Rating;  

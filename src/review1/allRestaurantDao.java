@@ -28,11 +28,12 @@ public class allRestaurantDao {
             Connection connection;
             connection = DriverManager.getConnection(db.url, db.username, db.password);
             Statement st = connection.createStatement();
-            String countfromdatabase = "Select NameRestaurant,Rating,Province From Restaurant";
+            String countfromdatabase = "Select idRestaurant,NameRestaurant,Rating,Province From Restaurant";
             ResultSet rs = st.executeQuery(countfromdatabase);
 
             while (rs.next()) {
-                list.add(new Restaurant(rs.getString("NameRestaurant"), rs.getDouble("Rating"), rs.getString("Province")));
+                list.add(new Restaurant(rs.getInt("idRestaurant"),rs.getString("NameRestaurant"), rs.getDouble("Rating"), rs.getString("Province")));
+               
             }
 
         } catch (SQLException ex) {

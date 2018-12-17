@@ -39,12 +39,13 @@ public class allRastaurant extends javax.swing.JFrame {
         ArrayList<Restaurant> getRestaurant = new ArrayList<Restaurant>();
         getRestaurant = aRS.getData();
 
-        String rw[] = new String[3];
+        String rw[] = new String[4];
 
         for (int i = 0; i < getRestaurant.size(); i++) {
-            rw[0] = getRestaurant.get(i).getNameRestaurant();
-            rw[1] = "" + getRestaurant.get(i).getRating();
-            rw[2] = getRestaurant.get(i).getProvince();
+            rw[0] = "" + getRestaurant.get(i).getIDRestaurant();
+            rw[1] = getRestaurant.get(i).getNameRestaurant();
+            rw[2] = "" + getRestaurant.get(i).getRating();
+            rw[3] = getRestaurant.get(i).getProvince();
 
             model.addRow(rw);
 
@@ -104,7 +105,7 @@ public class allRastaurant extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Name", "Rating", "Province"
+                "id", "Name", "Rating", "Province"
             }
         ));
         showRestaurantTable.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -125,6 +126,11 @@ public class allRastaurant extends javax.swing.JFrame {
 
         see_review.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         see_review.setText("ดูรีวิว");
+        see_review.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                see_reviewActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,15 +145,17 @@ public class allRastaurant extends javax.swing.JFrame {
                     .addComponent(see_review)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(54, 54, 54)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(comboprovince, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(396, 396, 396)
                                 .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 805, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 805, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -209,10 +217,11 @@ public class allRastaurant extends javax.swing.JFrame {
         boolean t = true;
         for (int i = 0; i < getRestaurant.size(); i++) {
             if (comboprovince.getSelectedItem().equals("ร้านทั้งหมด")) {
-                
-                rw[0] = getRestaurant.get(i).getNameRestaurant();
-                rw[1] = "" + getRestaurant.get(i).getRating();
-                rw[2] = getRestaurant.get(i).getProvince();
+
+                rw[0] = "" + getRestaurant.get(i).getIDRestaurant();
+                rw[1] = getRestaurant.get(i).getNameRestaurant();
+                rw[2] = "" + getRestaurant.get(i).getRating();
+                rw[3] = getRestaurant.get(i).getProvince();
 
                 model.addRow(rw);
 
@@ -224,12 +233,13 @@ public class allRastaurant extends javax.swing.JFrame {
                         dm.removeRow(0);
                     }
                     t = false;
-                    i=0;
+                    i = 0;
                 } else {
-                    
-                    getByProvince[0] = getRestaurant.get(i).getNameRestaurant();
-                    getByProvince[1] = "" + getRestaurant.get(i).getRating();
-                    getByProvince[2] = getRestaurant.get(i).getProvince();
+
+                    rw[0] = "" + getRestaurant.get(i).getIDRestaurant();
+                    rw[1] = getRestaurant.get(i).getNameRestaurant();
+                    rw[2] = "" + getRestaurant.get(i).getRating();
+                    rw[3] = getRestaurant.get(i).getProvince();
                     model.addRow(getByProvince);
 
                 }
@@ -250,6 +260,18 @@ public class allRastaurant extends javax.swing.JFrame {
     private void showRestaurantTableAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_showRestaurantTableAncestorAdded
 
     }//GEN-LAST:event_showRestaurantTableAncestorAdded
+
+    private void see_reviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_see_reviewActionPerformed
+        DefaultTableModel model = (DefaultTableModel) showRestaurantTable.getModel();
+
+        int index = showRestaurantTable.getSelectedRow();
+
+        model = (DefaultTableModel) showRestaurantTable.getModel();
+
+        int value = Integer.parseInt(model.getValueAt(index, 0).toString());
+        int idRestaurant = value;
+        System.out.println(idRestaurant);
+    }//GEN-LAST:event_see_reviewActionPerformed
 
     /**
      * @param args the command line arguments
