@@ -212,8 +212,8 @@ public class allRastaurant extends javax.swing.JFrame {
         ArrayList<Restaurant> getRestaurant = new ArrayList<Restaurant>();
         getRestaurant = aRS.getData();
 
-        String getByProvince[] = new String[3];
-        String rw[] = new String[3];
+        String getByProvince[] = new String[4];
+        String rw[] = new String[4];
         boolean t = true;
         for (int i = 0; i < getRestaurant.size(); i++) {
             if (comboprovince.getSelectedItem().equals("ร้านทั้งหมด")) {
@@ -240,7 +240,8 @@ public class allRastaurant extends javax.swing.JFrame {
                     rw[1] = getRestaurant.get(i).getNameRestaurant();
                     rw[2] = "" + getRestaurant.get(i).getRating();
                     rw[3] = getRestaurant.get(i).getProvince();
-                    model.addRow(getByProvince);
+                    
+                    model.addRow(rw);
 
                 }
             } else {
